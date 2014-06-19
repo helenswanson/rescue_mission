@@ -2,4 +2,35 @@
 
 <p><%= @question.description %></p>
 
-<a href='/questions'>Return to question list</a>
+<a href='/questions'>Return to question list</a><br/><br/>
+
+<h3>Answer the question</h3>
+
+<%= form_for [@question, @answer] do |f| %>
+
+  <% if @answer.errors.any? %>
+    <ul>
+      <% @answer.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <div>
+    <%= f.label :response %>
+    <%= f.text_area :response %>
+  </div>
+  <br/>
+  <%= f.submit 'Submit' %>
+<% end %>
+
+<br/><br/>
+
+<h3>Answers</h3><br/>
+
+<ul>
+  <% @question.answers.each.each do |answer| %>
+    <li><%= answer.response %></li>
+  <% end %>
+</ul>
+
