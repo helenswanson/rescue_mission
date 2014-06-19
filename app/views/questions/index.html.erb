@@ -1,0 +1,7 @@
+<h3>All Questions</h3>
+
+<ul>
+  <% @questions.each do |question| %>
+    <li><a href="/questions/<%= question.id %>"><%= "#{question.title}" %></a><%=", posted at #{question.created_at}" %></li>
+  <% end %>
+</ul>
