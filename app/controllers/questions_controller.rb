@@ -6,7 +6,6 @@ class QuestionsController < ApplicationController
   def show
     @question = Question.find(params[:id])
     @answer = Answer.new
-
   end
 
   def new
@@ -18,22 +17,36 @@ class QuestionsController < ApplicationController
 
     if @question.save
       flash[:notice] = "Success!"
-      redirect_to '/questions'
+      redirect_to questions_path
     else
       flash.now[:notice] = "Your question couldn't be submitted."
       render :new
     end
   end
 
+  def edit
+    @question = Question.find(params[:id])
+  end
+
+  def update
+    @question = Question.find(params[:id])
+
+    if @question.update(question_params)
+      flash[:notice] = "Success!"
+      redirect_to questions_path(@question)
+    else
+      flash.now[:notice] = "Your edit couldn't be implimented."
+      render :edit
+    end
+  end
+
+  def destroy
+  end
+
+
   private
 
   def question_params
     params.require(:question).permit(:title, :description)
   end
-
-
-
-
-
-
 end

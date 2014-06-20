@@ -1,4 +1,5 @@
 <h3><%= @question.title %></h3>
+<p><a href="/questions/<%= @question.id %>/edit">Edit question</a>
 
 <p><%= @question.description %></p>
 
@@ -19,14 +20,14 @@
   <div>
     <%= f.label :response %>
     <%= f.text_area :response %>
-  </div>
-  <br/>
+  </div><br/>
+
   <%= f.submit 'Submit' %>
 <% end %>
 
 <br/><br/>
 
-<h3>Answers</h3><br/>
+<h3>Answers</h3>
 
 <ul>
   <% @question.answers.each.each do |answer| %>
