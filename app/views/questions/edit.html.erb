@@ -22,4 +22,9 @@
   <br/>
 
   <%= f.submit 'Submit' %>
-<% end %>
+<% end %><br/>
+
+<div>
+  <%= link_to "Delete question", question_path, method: :delete, data: {
+  confirm: "Are you sure?" } %>
+</div>

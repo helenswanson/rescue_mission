@@ -1,12 +1,9 @@
 <h3><%= @question.title %></h3>
-<p><a href="/questions/<%= @question.id %>/edit">Edit question</a>
-
-<p><%= @question.description %></p>
-
-<a href='/questions'>Return to question list</a><br/><br/>
+<div><%= link_to "Edit question", edit_question_path %></div><br/>
+<div><%= @question.description %></div><br/>
+<div><%= link_to "Return to question list", question_path %></div></br>
 
 <h3>Answer the question</h3>
-
 <%= form_for [@question, @answer] do |f| %>
 
   <% if @answer.errors.any? %>
@@ -22,16 +19,20 @@
     <%= f.text_area :response %>
   </div><br/>
 
-  <%= f.submit 'Submit' %>
+  <%= f.submit %>
 <% end %>
 
 <br/><br/>
 
 <h3>Answers</h3>
-
 <ul>
-  <% @question.answers.each.each do |answer| %>
-    <li><%= answer.response %></li>
-  <% end %>
-</ul>
+    <% @question.answers.order(created_at: :desc).each do |answer| %>
+      <li><%= answer.response %></li>
+    <% end %>
+</ul><br/><br/>
+
+<div>
+  <%= link_to "Delete question", question_path, method: :delete, data: {
+  confirm: "Are you sure?" } %>
+</div>
 
